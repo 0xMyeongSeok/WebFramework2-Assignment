@@ -106,9 +106,21 @@ public class ProductController {
 
         if (productData.isPresent()) {
 			Product _product = productData.get();
-			_product.setName(product.getName());
-			_product.setPrice(product.getPrice());
+			if (product.getName() != null)
+				_product.setName(product.getName());
+			if (product.getManufacturer() != null)
+				_product.setManufacturer(product.getManufacturer());
+			if (product.getCategory() != null)
+				_product.setCategory(product.getCategory());
+			if (product.getPrice() > 0)
+				_product.setPrice(product.getPrice());
+			if (product.getDescription() != null)
+				_product.setDescription(product.getDescription());
+			if (product.getUnitInStock() > 0)
+				_product.setUnitInStock(product.getUnitInStock());
+
 			return new ResponseEntity<>(repository.save(_product), HttpStatus.OK);
+
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
